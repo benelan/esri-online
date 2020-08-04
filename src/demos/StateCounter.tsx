@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 const StateCounter = () => {
   // const [currentValue, setter] = useState(initialValue);
-  const [counter, setCounter] = useState(0);
-  // const [person, setPerson] = useState(/* some Person object */);
+  const [counter, setCounter] = useState<number>(0);
+  // const [person, setPerson] = useState({firstName: 'John', lastName: 'Paxton'});
 
   let nextCounter = counter + 1;
 
   const clickHandler = () => {
     console.log('Next value will be ', nextCounter);
     setCounter(nextCounter);
-  }
+  };
 
   return (
     <div>
@@ -25,10 +25,7 @@ const StateCounter = () => {
           Decrement
         </button>
         &nbsp;
-        <button
-          className="btn btn-success"
-          onClick={clickHandler}
-        >
+        <button className="btn btn-success" onClick={clickHandler}>
           Increment
         </button>
       </div>

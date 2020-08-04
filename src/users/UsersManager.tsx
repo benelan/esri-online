@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import UserDetails from './UserDetails';
-import { users } from '@speedingplanet/rest-server';
+import UsersBrowser from './UsersBrowser';
 
 export default class UsersManager extends Component {
   render() {
@@ -8,8 +7,7 @@ export default class UsersManager extends Component {
       <div className="row">
         <div className="col">
           <h2>Users Manager</h2>
-          {/* Pass one user to display into UserDetails */}
-          <UserDetails user={users[0]} />
+          <UsersBrowser />
         </div>
       </div>
     );
