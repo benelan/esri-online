@@ -2,9 +2,10 @@ import React from 'react';
 
 interface CustomGreeterProps {
   firstName: string;
-  city?: string;
-  // city: string | undefined;
+  lastName?: string;
+  // lastName: string | undefined
 }
+
 
 const CustomGreeter = ({ firstName }: CustomGreeterProps) => {
   // let name = 'John';
@@ -20,6 +21,8 @@ const CustomGreeter = ({ firstName }: CustomGreeterProps) => {
 };
 
 const UsingCustomGreeter = () => {
-  return <CustomGreeter firstName="John" />;
+  return <CustomGreeter firstName="Sameer" />;
 };
+
 export default CustomGreeter;
+export { UsingCustomGreeter };
