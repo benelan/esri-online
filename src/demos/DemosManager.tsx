@@ -4,6 +4,7 @@ import FirstComponent from './FirstComponent';
 import { UsingCustomGreeter } from './CustomGreeter';
 import EventHandling from './EventHandling';
 import StateCounter from './StateCounter';
+import ChildToParent from './ChildToParent';
 
 function DemosManager() {
   return (
@@ -22,6 +23,9 @@ function DemosManager() {
           <li>
             <Link to="/demos/state-counter">State Counter</Link>
           </li>
+          <li>
+            <Link to="/demos/child-to-parent">Child to Parent communication</Link>
+          </li>
         </ul>
       </div>
       <div className="col">
@@ -37,6 +41,9 @@ function DemosManager() {
           </Route>
           <Route path="/demos/state-counter">
             <StateCounter />
+          </Route>
+          <Route path="/demos/child-to-parent">
+            <ChildToParent />
           </Route>
         </Switch>
       </div>
