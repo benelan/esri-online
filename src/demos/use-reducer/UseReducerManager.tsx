@@ -15,19 +15,27 @@ export interface PeopleFilter {
 
 interface DemoState {
   people: Person[];
-  peopleFilter: PeopleFilter | null;
+  peopleFilter: PeopleFilter;
+  highlightFiltered: boolean;
   sortField: SortField;
   sortDirection: SortDirection;
 }
 
 const initialState: DemoState = {
   people,
-  peopleFilter: null,
+  peopleFilter: {
+    filterField: '',
+    filterText: '',
+  },
+  highlightFiltered: true,
   sortField: '',
   sortDirection: 'asc',
 };
 
-type Action = { type: 'sort'; payload: SortField };
+type Action =
+  | { type: 'sort'; payload: SortField }
+  | { type: 'filter'; payload: PeopleFilter }
+  | { type: 'highlight'; payload: boolean };
 
 function reducer(state: DemoState, action: Action): DemoState {
   switch (action.type) {
@@ -38,26 +46,59 @@ function reducer(state: DemoState, action: Action): DemoState {
       }
       return { ...state, sortDirection, sortField: action.payload };
     }
+    case 'filter':
+      return { ...state, peopleFilter: action.payload };
+    case 'highlight':
+      return { ...state, highlightFiltered: action.payload };
     default:
-      return state;
+      throw new Error('No new state!');
   }
 }
 
 const UseReducerManager = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  let people = state.people;
+
+  if (!state.highlightFiltered) {
+    people = people.filter((person) => {
+      if (state.peopleFilter.filterField === '') return false;
+      return (
+        person[state.peopleFilter?.filterField] ===
+        state.peopleFilter?.filterText
+      );
+    });
+  }
+
   const displayPeople = lodash.orderBy(
-    state.people,
+    people,
     state.sortField,
     state.sortDirection,
   );
 
   return (
     <section>
-      {/* TODO: Implement callFilter */}
-      <UseReducerFilter callFilter={() => console.log('callFilter')} />
+      <div className="form-check mb-2">
+        <input
+          type="checkbox"
+          id="highlight-filtered"
+          className="form-check-input"
+          checked={state.highlightFiltered}
+          onChange={(e) => {
+            dispatch({ type: 'highlight', payload: e.currentTarget.checked });
+          }}
+        />
+        <label htmlFor="highlight-filtered" className="form-check-label">
+          Highlight matches
+        </label>
+      </div>
+      <UseReducerFilter
+        callFilter={(filter) => dispatch({ type: 'filter', payload: filter })}
+      />
       <UseReducerGrid
         people={displayPeople}
+        filter={state.peopleFilter}
+        highlightFiltered={state.highlightFiltered}
         clickHeader={(field) => dispatch({ type: 'sort', payload: field })}
       />
     </section>

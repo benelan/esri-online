@@ -4,12 +4,14 @@ import { SortField, PeopleFilter } from './UseReducerManager';
 
 interface UseReducerGridProps {
   people: Person[];
-  filter?: PeopleFilter;
+  filter?: PeopleFilter | null;
+  highlightFiltered: boolean;
   clickHeader?: (header: SortField) => void;
 }
 
 const UseReducerGrid = ({
   people,
+  highlightFiltered=true,
   filter,
   clickHeader,
 }: UseReducerGridProps) => {
@@ -45,7 +47,7 @@ const UseReducerGrid = ({
       </thead>
       <tbody>
         {people.map((person) => (
-          <tr key={person.id} className={highlightRow(person)}>
+          <tr key={person.id} className={highlightFiltered ? highlightRow(person) : ''}>
             <td>{person.firstName}</td>
             <td>{person.lastName}</td>
             <td>{person.state}</td>
