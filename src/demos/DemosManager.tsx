@@ -6,6 +6,7 @@ import EventHandling from './EventHandling';
 import StateCounter from './StateCounter';
 import ChildToParent from './ChildToParent';
 import UseReducerManager from './use-reducer/UseReducerManager';
+import GridExample from './GridExample';
 
 function DemosManager() {
   return (
@@ -28,6 +29,9 @@ function DemosManager() {
             <Link to="/demos/child-to-parent">Child to Parent communication</Link>
           </li>
           <li>
+            <Link to="/demos/list-rendering">Rendering a list</Link>
+          </li>
+          <li>
             <Link to="/demos/use-reducer">Use Reducer</Link>
           </li>
         </ul>
@@ -48,6 +52,9 @@ function DemosManager() {
           </Route>
           <Route path="/demos/child-to-parent">
             <ChildToParent />
+          </Route>
+          <Route path="/demos/list-rendering">
+            <GridExample />
           </Route>
           <Route path="/demos/use-reducer">
             <UseReducerManager />

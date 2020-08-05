@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [React TypeScript Cheat sheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)  
 [Bootstrap Docs](https://getbootstrap.com/docs/4.5/getting-started/introduction/)  
 [JavaScript compatibility chart](http://kangax.github.io/compat-table/es2016plus/)
+[Array index as a key is not great](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)
 
 
 ## Available Scripts
