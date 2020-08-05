@@ -7,6 +7,7 @@ import StateCounter from './StateCounter';
 import ChildToParent from './ChildToParent';
 import UseReducerManager from './use-reducer/UseReducerManager';
 import GridExample from './GridExample';
+import UserRenderer from './UserRenderer';
 
 function DemosManager() {
   return (
@@ -32,6 +33,9 @@ function DemosManager() {
             <Link to="/demos/list-rendering">Rendering a list</Link>
           </li>
           <li>
+            <Link to="/demos/user-renderer">User Renderer</Link>
+          </li>
+          <li>
             <Link to="/demos/use-reducer">Use Reducer</Link>
           </li>
         </ul>
@@ -55,6 +59,9 @@ function DemosManager() {
           </Route>
           <Route path="/demos/list-rendering">
             <GridExample />
+          </Route>
+          <Route path="/demos/user-renderer">
+            <UserRenderer/>
           </Route>
           <Route path="/demos/use-reducer">
             <UseReducerManager />
