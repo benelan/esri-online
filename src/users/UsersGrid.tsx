@@ -34,26 +34,28 @@ export interface ColumnConfig {
 interface UsersGridProps {
   users: User[];
   columns: ColumnConfig[];
+  selectColumn?: (field: string) => void;
 }
 
-const UsersGrid = ({ users, columns }: UsersGridProps) => {
+const UsersGrid = ({ users, columns, selectColumn }: UsersGridProps) => {
   return (
     <table className="table table-striped table-hover">
       <thead>
         <tr>
           {columns.map(({ field, label }) => (
-            <th key={field}>{label}</th>
+            <th key={field} onClick={() => selectColumn && selectColumn(field)}>
+            {/* <th key={field} onClick={() => selectColumn!(field)}> */}
+              {label}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {users.map((user) => (
           <tr key={`${user.id}-${user.version}`}>
-            {
-              columns.map(({field}) => (
-                <td key={field}>{lodash.get(user, field)}</td>
-              ))
-            }
+            {columns.map(({ field }) => (
+              <td key={field}>{lodash.get(user, field)}</td>
+            ))}
           </tr>
         ))}
       </tbody>

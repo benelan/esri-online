@@ -12,14 +12,18 @@ const person = {
 
 const entryfied = [['firstName', 'John'], ['lastName', 'Paxton']];
 
+// TODO: generics?
 function mapper(obj: any) {
+  // TODO: Should be a JSXElement, I think
   const results: any[] = [];
+
   Object.entries(obj).forEach(([key, value]) => {
     if (typeof value === 'object' && value !== null) {
       results.push(...mapper(value));
     } else {
       results.push(
-        <tr key={uuid()}>
+        // TODO: path + key
+        <tr key={key}>
           <td>{key}</td>
           <td>{value as any}</td>
         </tr>,

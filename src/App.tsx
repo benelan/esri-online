@@ -6,7 +6,7 @@ import {
   NavLink,
 } from 'react-router-dom';
 import TransactionsManager from './transactions/TransactionsManager';
-import UsersManager from './users/UsersManager';
+import UsersManager from './users/UsersManagerFunctional';
 import DemosManager from './demos/DemosManager';
 import Home from './Home';
 
