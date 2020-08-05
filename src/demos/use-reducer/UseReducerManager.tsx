@@ -54,6 +54,7 @@ const UseReducerManager = () => {
 
   return (
     <section>
+      {/* TODO: Implement callFilter */}
       <UseReducerFilter callFilter={() => console.log('callFilter')} />
       <UseReducerGrid
         people={displayPeople}

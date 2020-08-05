@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import UserDetails from './UserDetails';
 import { users } from '@speedingplanet/rest-server';
+import BrowserButtons from '../common/BrowserButtons';
 
 const UsersBrowser = () => {
-  const [currentPosition, setCurrentPosition] = useState(0);
+  const [currentPosition, setCurrentPosition] = useState(users.length -1);
 
   const nextUser = () => {
     const max = users.length - 1;
@@ -23,14 +24,13 @@ const UsersBrowser = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col">
-          <button className="btn btn-info" onClick={previousUser}>
-            Previous
-          </button>
-          &nbsp;
-          <button className="btn btn-info" onClick={nextUser}>
-            Next
-          </button>
+        <div className="col mt-2">
+          <BrowserButtons
+            previousEnabled={!!currentPosition}
+            nextEnabled={currentPosition < users.length - 1}
+            previousItem={previousUser}
+            nextItem={nextUser}
+          />
         </div>
       </div>
     </section>
