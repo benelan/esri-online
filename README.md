@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Links
+[React TypeScript Cheat sheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)  
+[Bootstrap Docs](https://getbootstrap.com/docs/4.5/getting-started/introduction/)  
+[JavaScript compatibility chart](http://kangax.github.io/compat-table/es2016plus/)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
