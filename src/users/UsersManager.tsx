@@ -4,6 +4,18 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import UsersBrowser from './UsersBrowser';
 import { users } from '@speedingplanet/rest-server';
 import UsersGrid from './UsersGrid';
+import { ColumnConfig } from './UsersGrid';
+
+const columns: ColumnConfig[] = [
+  {
+    field: 'displayName',
+    label: 'Name'
+  },
+  {
+    field: 'address.state',
+    label: 'State'
+  }
+];
 
 export default class UsersManager extends Component {
   render() {
@@ -24,7 +36,7 @@ export default class UsersManager extends Component {
               <UsersBrowser />
             </Route>
             <Route path="/users/list">
-              <UsersGrid users={users} />
+              <UsersGrid users={users} columns={columns}/>
             </Route>
             <Route
               path="/users/parameter/:foo"

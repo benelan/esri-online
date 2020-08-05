@@ -1,5 +1,6 @@
 import React from 'react';
 import { User } from '@speedingplanet/rest-server';
+import * as lodash from 'lodash';
 
 // Passed an array of User[]
 // (the type is available from @speedingplanet/rest-server)
@@ -25,26 +26,34 @@ import { User } from '@speedingplanet/rest-server';
 
 */
 
-interface UsersGridProps {
-  users: User[];
+export interface ColumnConfig {
+  label: string;
+  field: string;
 }
 
-const UsersGrid = ({ users }: UsersGridProps) => {
+interface UsersGridProps {
+  users: User[];
+  columns: ColumnConfig[];
+}
+
+const UsersGrid = ({ users, columns }: UsersGridProps) => {
   return (
     <table className="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>City</th>
-          <th>State</th>
+          {columns.map(({ field, label }) => (
+            <th key={field}>{label}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
         {users.map((user) => (
           <tr key={`${user.id}-${user.version}`}>
-            <td>{user.displayName}</td>
-            <td>{user.address.city}</td>
-            <td>{user.address.state}</td>
+            {
+              columns.map(({field}) => (
+                <td key={field}>{lodash.get(user, field)}</td>
+              ))
+            }
           </tr>
         ))}
       </tbody>
