@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [JavaScript compatibility chart](http://kangax.github.io/compat-table/es2016plus/)
 [Array index as a key is not great](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)
 [React Router](https://reactrouter.com/web/)
+[ESLint disable rules per line or per file](https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments)
 
 ## Available Scripts
 

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { User } from '@speedingplanet/rest-server';
 
 // Passed an array of User[]
 // (the type is available from @speedingplanet/rest-server)
@@ -24,11 +25,31 @@ import React from 'react'
 
 */
 
-
-const UsersGrid = () => {
-  return (
-    <table className="table table-striped table-hover"></table>
-  )
+interface UsersGridProps {
+  users: User[];
 }
 
-export default UsersGrid
+const UsersGrid = ({ users }: UsersGridProps) => {
+  return (
+    <table className="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user) => (
+          <tr key={`${user.id}-${user.version}`}>
+            <td>{user.displayName}</td>
+            <td>{user.address.city}</td>
+            <td>{user.address.state}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default UsersGrid;
