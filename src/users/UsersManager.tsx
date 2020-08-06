@@ -43,7 +43,7 @@ export default class UsersManager extends Component {
           </ul>
           <Switch>
             <Route path={['/users/browse', '/users']} exact>
-              <UsersBrowser />
+              <UsersBrowser users={users}/>
             </Route>
             <Route path="/users/list">
               <UsersGrid users={users} columns={columns} selectColumn={this.handleSelectColumn}/>

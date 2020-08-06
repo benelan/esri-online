@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import UserDetails from './UserDetails';
-import { users } from '@speedingplanet/rest-server';
 import BrowserButtons from '../common/BrowserButtons';
+import { User } from '@speedingplanet/rest-server';
 
-const UsersBrowser = () => {
-  const [currentPosition, setCurrentPosition] = useState(users.length -1);
+interface UsersBrowserProps {
+  users: User[];
+}
+
+const UsersBrowser = ({ users }: UsersBrowserProps) => {
+  const [currentPosition, setCurrentPosition] = useState(users.length - 1);
 
   const nextUser = () => {
     const max = users.length - 1;

@@ -62,7 +62,7 @@ const UsersManagerFunctional = () => {
         </ul>
         <Switch>
           <Route path={['/users/browse', '/users']} exact>
-            <UsersBrowser />
+            <UsersBrowser users={users}/>
           </Route>
           <Route path="/users/list">
             <UsersGrid
