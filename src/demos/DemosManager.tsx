@@ -12,6 +12,7 @@ import Rerendering from './Rerendering';
 import UseEffectDemo from './UseEffectDemo';
 import RemoteData from './RemoteData';
 import ReduxToolkitThunk from './redux/redux-toolkit-thunk/ReduxToolkitThunk';
+import ReduxCounter from './redux/redux-counter/ReduxCounter';
 
 function DemosManager() {
   return (
@@ -54,6 +55,9 @@ function DemosManager() {
             <Link to="/demos/use-reducer">Use Reducer</Link>
           </li>
           <li>
+            <Link to="/demos/redux-counter">Redux Counter</Link>
+          </li>
+          <li>
             <Link to="/demos/redux-thunk">Redux Thunk</Link>
           </li>
         </ul>
@@ -92,6 +96,9 @@ function DemosManager() {
           </Route>
           <Route path="/demos/use-reducer">
             <UseReducerManager />
+          </Route>
+          <Route path="/demos/redux-counter">
+            <ReduxCounter />
           </Route>
           <Route path="/demos/redux-thunk">
             <ReduxToolkitThunk />
