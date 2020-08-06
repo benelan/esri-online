@@ -9,6 +9,8 @@ import UseReducerManager from './use-reducer/UseReducerManager';
 import GridExample from './GridExample';
 import UserRenderer from './UserRenderer';
 import Rerendering from './Rerendering';
+import UseEffectDemo from './UseEffectDemo';
+import RemoteData from './RemoteData';
 
 function DemosManager() {
   return (
@@ -28,7 +30,9 @@ function DemosManager() {
             <Link to="/demos/state-counter">State Counter</Link>
           </li>
           <li>
-            <Link to="/demos/child-to-parent">Child to Parent communication</Link>
+            <Link to="/demos/child-to-parent">
+              Child to Parent communication
+            </Link>
           </li>
           <li>
             <Link to="/demos/list-rendering">Rendering a list</Link>
@@ -37,7 +41,13 @@ function DemosManager() {
             <Link to="/demos/re-rendering">Rerendering</Link>
           </li>
           <li>
+            <Link to="/demos/remote-data">Remote Data</Link>
+          </li>
+          <li>
             <Link to="/demos/user-renderer">User Renderer</Link>
+          </li>
+          <li>
+            <Link to="/demos/use-effect">Use Effect</Link>
           </li>
           <li>
             <Link to="/demos/use-reducer">Use Reducer</Link>
@@ -67,8 +77,14 @@ function DemosManager() {
           <Route path="/demos/re-rendering">
             <Rerendering />
           </Route>
+          <Route path="/demos/remote-data">
+            <RemoteData />
+          </Route>
           <Route path="/demos/user-renderer">
-            <UserRenderer/>
+            <UserRenderer />
+          </Route>
+          <Route path="/demos/use-effect">
+            <UseEffectDemo />
           </Route>
           <Route path="/demos/use-reducer">
             <UseReducerManager />
