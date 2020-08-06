@@ -7,28 +7,25 @@ import UseReducerFilter from './UseReducerFilter';
 import './use-reducer.css';
 
 type SortDirection = 'asc' | 'desc';
-export type SortField = keyof Person | '';
+export type SortField = keyof Person;
+export type FilterFields = keyof Person | 'any'
+
 export interface PeopleFilter {
-  filterField: keyof Person | '';
+  filterField: FilterFields;
   filterText: string;
 }
 
 interface DemoState {
   people: Person[];
-  peopleFilter: PeopleFilter;
+  peopleFilter?: PeopleFilter;
   highlightFiltered: boolean;
-  sortField: SortField;
+  sortField?: SortField;
   sortDirection: SortDirection;
 }
 
 const initialState: DemoState = {
   people,
-  peopleFilter: {
-    filterField: '',
-    filterText: '',
-  },
   highlightFiltered: true,
-  sortField: '',
   sortDirection: 'asc',
 };
 
@@ -60,14 +57,19 @@ const UseReducerManager = () => {
 
   let people = state.people;
 
+  // TODO: Refactor here and in UseReducerGrid to use a Context object 
+  // to include a selector to get the appropriate set of records
   if (!state.highlightFiltered) {
     people = people.filter((person) => {
-      if (state.peopleFilter.filterField === '') return false;
-      return (
-        person[state.peopleFilter?.filterField] ===
-        state.peopleFilter?.filterText
-      );
-    });
+      if (!state.peopleFilter) return false;
+      const filterRe = new RegExp(state.peopleFilter.filterText, 'i');
+      let searchText = Object.values(person).join(' ');
+      if (state.peopleFilter.filterField !== 'any') {
+        searchText = person[state.peopleFilter.filterField];
+      }
+      // return person[filter.filterField].includes(filter.filterText);
+      return filterRe.test(searchText) ? 'highlight' : '';
+      });
   }
 
   const displayPeople = lodash.orderBy(
@@ -97,8 +99,7 @@ const UseReducerManager = () => {
       />
       <UseReducerGrid
         people={displayPeople}
-        filter={state.peopleFilter}
-        highlightFiltered={state.highlightFiltered}
+        highlightFilter={state.highlightFiltered ? state.peopleFilter : undefined}
         clickHeader={(field) => dispatch({ type: 'sort', payload: field })}
       />
     </section>

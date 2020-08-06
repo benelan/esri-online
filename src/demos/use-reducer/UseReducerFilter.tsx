@@ -1,6 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { PeopleFilter } from './UseReducerManager';
-import { Person } from './people';
+import { PeopleFilter, FilterFields } from './UseReducerManager';
 
 interface UseReducerFilterProps {
   callFilter: (filter: PeopleFilter) => void;
@@ -8,7 +7,7 @@ interface UseReducerFilterProps {
 
 const UseReducerFilter = ({ callFilter }: UseReducerFilterProps) => {
   const [filterText, setFilterText] = useState('');
-  const [filterField, setFilterField] = useState<keyof Person | ''>('');
+  const [filterField, setFilterField] = useState<FilterFields>('any');
 
   const updateState = (
     event: FormEvent<HTMLInputElement | HTMLSelectElement>,
@@ -16,7 +15,7 @@ const UseReducerFilter = ({ callFilter }: UseReducerFilterProps) => {
     if (event.currentTarget.id === 'filter-text') {
       setFilterText(event.currentTarget.value);
     } else if (event.currentTarget.id === 'filter-field') {
-      setFilterField(event.currentTarget.value as keyof Person | '');
+      setFilterField(event.currentTarget.value as FilterFields);
     }
   };
 
@@ -40,7 +39,7 @@ const UseReducerFilter = ({ callFilter }: UseReducerFilterProps) => {
         value={filterField}
         onChange={updateState}
       >
-        <option value="">None</option>
+        <option value="any">Any</option>
         <option value="firstName">First Name</option>
         <option value="lastName">Last Name</option>
         <option value="state">State</option>
@@ -50,7 +49,7 @@ const UseReducerFilter = ({ callFilter }: UseReducerFilterProps) => {
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() => callFilter({ filterField, filterText })}
+        onClick={() => callFilter({filterText, filterField})}
       >
         Filter
       </button>

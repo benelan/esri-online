@@ -4,32 +4,24 @@ import { SortField, PeopleFilter } from './UseReducerManager';
 
 interface UseReducerGridProps {
   people: Person[];
-  filter?: PeopleFilter | null;
-  highlightFiltered: boolean;
+  highlightFilter?: PeopleFilter;
   clickHeader?: (header: SortField) => void;
 }
 
 const UseReducerGrid = ({
   people,
-  highlightFiltered=true,
-  filter,
+  highlightFilter,
   clickHeader,
 }: UseReducerGridProps) => {
   const highlightRow = (person: Person): string => {
-    if (filter) {
-      if (filter.filterText === '') {
-        return '';
-      } else {
-        const filterRe = new RegExp(filter.filterText, 'i');
-        let searchText = Object.values(person).join(' ');
-        if (filter.filterField !== '') {
-          searchText = person[filter.filterField];
-        }
-        // return person[filter.filterField].includes(filter.filterText);
-        return filterRe.test(searchText) ? 'highlight' : '';
-      }
+    if (!highlightFilter) return '';
+    const filterRe = new RegExp(highlightFilter.filterText, 'i');
+    let searchText = Object.values(person).join(' ');
+    if (highlightFilter.filterField !== 'any') {
+      searchText = person[highlightFilter.filterField];
     }
-    return '';
+    // return person[filter.filterField].includes(filter.filterText);
+    return filterRe.test(searchText) ? 'highlight' : '';
   };
 
   return (
@@ -47,7 +39,10 @@ const UseReducerGrid = ({
       </thead>
       <tbody>
         {people.map((person) => (
-          <tr key={person.id} className={highlightFiltered ? highlightRow(person) : ''}>
+          <tr
+            key={person.id}
+            className={highlightFilter ? highlightRow(person) : ''}
+          >
             <td>{person.firstName}</td>
             <td>{person.lastName}</td>
             <td>{person.state}</td>
