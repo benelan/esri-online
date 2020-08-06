@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import UsersBrowser from './UsersBrowser';
-import { users } from '@speedingplanet/rest-server';
+import { dao, User } from '@speedingplanet/rest-server';
 import UsersGrid from './UsersGrid';
 import { ColumnConfig } from './UsersGrid';
 import * as lodash from 'lodash';
+import { AtomSpinner } from 'react-epic-spinners';
 
 // Replace getting users from @speedingplanet/rest-server with getting the dao ("dao")
 // Add useEffect to the imports from 'react'
 // Add useEffect code to call dao.findAllUsers() (make sure you don't endlessly loop!)
 // Set up a useState call to manage users
-
 
 const columns: ColumnConfig[] = [
   {
@@ -31,28 +31,46 @@ const columns: ColumnConfig[] = [
 type SortDirection = 'asc' | 'desc';
 interface UsersManagerState {
   sortField: string;
-  sortDirection: SortDirection
+  sortDirection: SortDirection;
 }
 
 const UsersManagerFunctional = () => {
   // single object
-  const [sortConfig, setSortConfig] = useState<UsersManagerState>({ sortField: '', sortDirection: 'asc'});
+  const [sortConfig, setSortConfig] = useState<UsersManagerState>({
+    sortField: '',
+    sortDirection: 'asc',
+  });
 
   // Individual properties
   // const [sortField, setSortField] = useState('');
   // const [sortDirection, setSortDirection] = useState('asc');
 
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    dao
+      .findAllUsers({ _delay: 5000 })
+      .then(({ data }) => {
+        setUsers(data);
+      })
+      .catch((error) => console.error('Some problem: ', error));
+  }, []);
+
   const handleSelectColumn = (field: string) => {
     let sortDirection: SortDirection = 'asc';
 
     if (sortConfig.sortField === field && sortConfig.sortDirection === 'asc') {
-      sortDirection = 'desc'
+      sortDirection = 'desc';
     }
 
-    setSortConfig({sortField: field, sortDirection});
-  }
+    setSortConfig({ sortField: field, sortDirection });
+  };
 
-  const displayUsers = lodash.orderBy(users, sortConfig.sortField, sortConfig.sortDirection);
+  const displayUsers = lodash.orderBy(
+    users,
+    sortConfig.sortField,
+    sortConfig.sortDirection,
+  );
 
   return (
     <div className="row">
@@ -68,14 +86,22 @@ const UsersManagerFunctional = () => {
         </ul>
         <Switch>
           <Route path={['/users/browse', '/users']} exact>
-            <UsersBrowser users={users}/>
+            {users.length === 0 ? (
+              <AtomSpinner size={150} color="blue" />
+            ) : (
+              <UsersBrowser users={users} />
+            )}
           </Route>
           <Route path="/users/list">
-            <UsersGrid
-              users={displayUsers}
-              columns={columns}
-              selectColumn={handleSelectColumn}
-            />
+            {users.length === 0 ? (
+              <p>Loading...</p>
+            ) : (
+              <UsersGrid
+                users={displayUsers}
+                columns={columns}
+                selectColumn={handleSelectColumn}
+              />
+            )}
           </Route>
           <Route
             path="/users/parameter/:foo"
