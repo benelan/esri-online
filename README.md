@@ -8,6 +8,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [React Router](https://reactrouter.com/web/)
 [ESLint disable rules per line or per file](https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments)
 [Lodash docs](https://lodash.com/docs/)
+[React lifecycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+[A complete guide to useEffect (a 49 minute read!)](https://overreacted.io/a-complete-guide-to-useeffect/)
 
 ## Available Scripts
 
