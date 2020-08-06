@@ -62,6 +62,16 @@ export const {
 
 export const reducer = transactionSlice.reducer;
 
+export const fetchTransactionsPromise = (): TransactionsThunk => {
+  return function (dispatch) {
+    dispatch(requestTransactions());
+    dao
+      .findAllTransactions()
+      .then((results) => dispatch(requestTransactionsSuccess(results.data)))
+      .catch((error) => dispatch(requestTransactionsError(error)));
+  };
+};
+
 export const fetchTransactions = (): TransactionsThunk => async (dispatch) => {
   dispatch(requestTransactions());
   try {

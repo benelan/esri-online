@@ -43,11 +43,16 @@ const mapStateToProps = (state: ReturnType<typeof reducer>) => {
 };
 
 // Actions to dispatch to the store mapped to component event handlers (also props)
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToPropsFunctional = (dispatch: Dispatch) => { // eslint-disable-line
   return {
     clickIncrement: () => dispatch(increment()),
     clickDecrement: () => dispatch(decrement()),
   };
+};
+
+const mapDispatchToProps = {
+  clickIncrement: increment,
+  clickDecrement: decrement,
 };
 
 const ReduxCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);

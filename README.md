@@ -10,6 +10,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [Lodash docs](https://lodash.com/docs/)
 [React lifecycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 [A complete guide to useEffect (a 49 minute read!)](https://overreacted.io/a-complete-guide-to-useeffect/)
+[Redux, Thunks, and TypeScript](https://redux-toolkit.js.org/usage/usage-with-typescript#getting-the-state-type)
+[Unknown vs Any](https://mariusschulz.com/blog/the-unknown-type-in-typescript)
 
 ## Available Scripts
 
