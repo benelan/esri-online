@@ -6,8 +6,8 @@ import '@testing-library/jest-dom/extend-expect';
 it('should render the label properly', () => {
   const testLabel = 'testLabel',
     id = 'foo';
-  const { queryByLabelText, getByLabelText, findByLabelText } = render(
-    <TextInput label={testLabel} id={id} />,
+  const { queryByLabelText } = render(
+    <TextInput label={testLabel} id={id} emitValue={() => {}} />,
   );
   // const renderResult = render(<TextInput label={testLabel} id={id} />);
 
