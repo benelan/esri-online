@@ -5,9 +5,12 @@ const RemoteData = () => {
   const [transactionCount, setTransactionCount] = useState(0);
 
   useEffect(() => {
-    dao.findAllTransactions().then((response) => {
-      setTransactionCount(response.data.length);
-    });
+    dao
+      .findAllTransactions()
+      .then((response) => {
+        setTransactionCount(response.data.length);
+      })
+      .catch((error) => console.error('Something went wrong'));
   }, []);
 
   return (
