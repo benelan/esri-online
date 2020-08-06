@@ -13,7 +13,7 @@ const RemoteData = () => {
         setTransactionCount(data.length);
       })
       .catch((error) => console.error('Something went wrong'));
-  }, runOnce);
+  }, runOnce); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>

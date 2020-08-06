@@ -7,6 +7,12 @@ import UsersGrid from './UsersGrid';
 import { ColumnConfig } from './UsersGrid';
 import * as lodash from 'lodash';
 
+// Replace getting users from @speedingplanet/rest-server with getting the dao ("dao")
+// Add useEffect to the imports from 'react'
+// Add useEffect code to call dao.findAllUsers() (make sure you don't endlessly loop!)
+// Set up a useState call to manage users
+
+
 const columns: ColumnConfig[] = [
   {
     field: 'displayName',
